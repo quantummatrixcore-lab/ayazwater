@@ -124,3 +124,90 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Randevu Modal
+const randevuBtn = document.getElementById('randevu-btn');
+const randevuModal = document.getElementById('randevu-modal');
+const modalClose = document.getElementById('modal-close');
+const randevuForm = document.getElementById('randevu-form');
+
+// Set minimum date to today
+const today = new Date().toISOString().split('T')[0];
+const randevuTarih = document.getElementById('randevu-tarih');
+if (randevuTarih) {
+    randevuTarih.setAttribute('min', today);
+}
+
+// Open modal
+if (randevuBtn) {
+    randevuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        randevuModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+// Close modal
+if (modalClose) {
+    modalClose.addEventListener('click', () => {
+        randevuModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+
+// Close on overlay click
+if (randevuModal) {
+    randevuModal.addEventListener('click', (e) => {
+        if (e.target === randevuModal) {
+            randevuModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// Randevu form submission
+if (randevuForm) {
+    randevuForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const ad = formData.get('ad');
+        const telefon = formData.get('telefon');
+        const tarih = formData.get('tarih');
+        const saat = formData.get('saat');
+        const hizmet = formData.get('hizmet');
+        const adres = formData.get('adres');
+        const not = formData.get('not');
+
+        // Format date
+        const dateObj = new Date(tarih);
+        const formattedDate = dateObj.toLocaleDateString('tr-TR');
+
+        // Create WhatsApp message
+        let message = `📅 *YENİ RANDEVU TALEBİ*%0A%0A`;
+        message += `👤 *Ad Soyad:* ${ad}%0A`;
+        message += `📱 *Telefon:* ${telefon}%0A`;
+        message += `📆 *Tarih:* ${formattedDate}%0A`;
+        message += `⏰ *Saat:* ${saat}%0A`;
+        message += `🔧 *Hizmet:* ${hizmet}%0A`;
+        if (adres) message += `📍 *Adres:* ${adres}%0A`;
+        if (not) message += `📝 *Not:* ${not}%0A`;
+
+        // Send to WhatsApp
+        const whatsappUrl = `https://wa.me/905316628829?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+
+        // Show success
+        const btn = this.querySelector('button[type="submit"]');
+        btn.innerHTML = '<span>✓ Randevu Talebiniz Gönderildi!</span>';
+        btn.style.background = '#22C55E';
+
+        setTimeout(() => {
+            this.reset();
+            randevuModal.classList.remove('active');
+            document.body.style.overflow = '';
+            btn.innerHTML = '<span>📅 Randevu Oluştur</span>';
+            btn.style.background = '';
+        }, 2000);
+    });
+}

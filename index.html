@@ -46,7 +46,7 @@
                 <p>Satış, kurulum, bakım ve arıza servisi - Bütün su arıtma ihtiyaçlarınız için 360 derece profesyonel
                     çözümler sunuyoruz.</p>
                 <div class="hero-buttons">
-                    <a href="#iletisim" class="btn btn-primary"><span>Ücretsiz Keşif</span></a>
+                    <a href="#" class="btn btn-primary" id="randevu-btn"><span>📅 Randevu Al</span></a>
                     <a href="tel:+905316628829" class="btn btn-secondary"><span class="pulse-dot"></span><span>0531 662
                             88 29</span></a>
                 </div>
@@ -394,6 +394,77 @@
         </div>
     </footer>
     <a href="https://wa.me/905316628829" class="floating-whatsapp" target="_blank" aria-label="WhatsApp">💬</a>
+
+    <!-- Randevu Modal -->
+    <div class="modal-overlay" id="randevu-modal">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-header">
+                <span class="modal-icon">📅</span>
+                <h3>Online Randevu Al</h3>
+                <p>Size en uygun tarih ve saati seçin</p>
+            </div>
+            <form class="randevu-form" id="randevu-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="randevu-ad">Adınız Soyadınız *</label>
+                        <input type="text" id="randevu-ad" name="ad" required placeholder="Adınız Soyadınız">
+                    </div>
+                    <div class="form-group">
+                        <label for="randevu-tel">Telefon *</label>
+                        <input type="tel" id="randevu-tel" name="telefon" required placeholder="05XX XXX XX XX">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="randevu-tarih">Randevu Tarihi *</label>
+                        <input type="date" id="randevu-tarih" name="tarih" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="randevu-saat">Randevu Saati *</label>
+                        <select id="randevu-saat" name="saat" required>
+                            <option value="">Saat Seçin</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="randevu-hizmet">Hizmet Türü *</label>
+                    <select id="randevu-hizmet" name="hizmet" required>
+                        <option value="">Hizmet Seçin</option>
+                        <option value="ucretsiz-kesif">Ücretsiz Keşif</option>
+                        <option value="kurulum">Yeni Cihaz Kurulumu</option>
+                        <option value="bakim">Bakım / Filtre Değişimi</option>
+                        <option value="ariza">Arıza Servisi</option>
+                        <option value="danisma">Danışmanlık</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="randevu-adres">Adres</label>
+                    <textarea id="randevu-adres" name="adres" rows="2"
+                        placeholder="Hizmet adresi (opsiyonel)"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="randevu-not">Not</label>
+                    <textarea id="randevu-not" name="not" rows="2"
+                        placeholder="Eklemek istediğiniz not (opsiyonel)"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span>📅 Randevu Oluştur</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
